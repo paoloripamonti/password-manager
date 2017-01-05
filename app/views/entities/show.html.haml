@@ -1,0 +1,45 @@
+.page-header
+  .pull-right
+    .btn-toolbar
+      =link_to root_path, :class=>"btn btn-raised btn-default" do
+        %i.mi.md-18.bottom chevron_left
+        Back
+      =link_to edit_entity_path(@entity), :class=>"btn btn-raised btn-warning" do
+        %i.mi.md-18.bottom edit
+        Edit
+      =link_to @entity, :method => :delete, :data => { confirm: 'Are you sure?' }, :class=>"btn btn-raised btn-danger" do
+        %i.mi.md-18.bottom delete
+        Delete
+
+  %h1
+    %small Site
+    = @entity.name
+
+.well
+  %dl.dl-horizontal
+    %dt Name
+    %dd= @entity.name  
+  %dl.dl-horizontal
+    %dt Description
+    %dd= @entity.description
+  %dl.dl-horizontal
+    %dt Username
+    %dd= @entity.username
+  %dl.dl-horizontal
+    %dt URL
+    %dd= link_to @entity.url, @entity.url, :target=>"_blank", :class=>"master-link" 
+  - @entity.custom_attributes.each do |key|
+    %dl.dl-horizontal
+      %dt=key
+      %dd= @entity[key]
+  %dl.dl-horizontal
+    %dt Password
+    %dd
+      .row        
+        .col-md-3
+          %span.label.label-default{:id=>"hidden_passsword_#{@entity.id.to_s}"}
+            HIDDEN      
+          %span.label.label-primary{:id=>"show_passsword_#{@entity.id.to_s}", :style=>"display: none;"}
+        .col-md-1{:style=>"margin-top: -15px;"}
+          =button_tag :class=> "btn btn-primary btn-xs btn-fab entry-master-password", :'data-object-id'=>@entity.id do
+            %i.material-icons{:id=>"icon_#{@entity.id}"} lock

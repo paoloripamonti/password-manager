@@ -1,0 +1,41 @@
+/*
+ *
+ *= require_tree .
+ *= require_self
+ *
+ *= require material_icons
+ *= require bootstrap.min.css
+ *= require bootstrap-material-design
+ *
+ */
+
+
+.middle-navbar-form{
+	width: 300px; 
+	margin: auto;
+}
+
+.bottom{
+	vertical-align: bottom !important;
+}
+
+.master-link{
+	color: #009688 !important;
+	background-color: transparent !important;
+}
+
+.dl-horizontal-left dt{
+    text-align: left;
+    margin-bottom: 1em;
+    width: auto;
+    padding-right: 1em;
+}
+
+.dl-horizontal-left dd{
+    margin-left: 0;
+    margin-bottom: 0;
+}
+
+.dl-horizontal-left{
+    margin-bottom: 0px;
+}

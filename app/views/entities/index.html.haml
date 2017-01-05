@@ -1,0 +1,44 @@
+.page-header
+  .pull-right
+    =link_to new_entity_path, :class=>"btn btn-primary" do
+      %i.mi.md-18.bottom add_circle_outline
+      New Password
+  %h1 Password Manager
+
+.list-group
+  - @entities.each do |entity|
+    .list-group-item
+      %a.entry-master-password{:href=>"#", :'data-object-id'=>entity.id}
+        .row-action-primary        
+          %i.material-icons{:id=>"icon_#{entity.id}"} lock
+      .row-content
+        = link_to entity_path(entity) do
+          .action-secondary
+            %i.material-icons info
+        %h4.list-group-item-heading
+          -if entity.url
+            = link_to entity.name, entity.url, :target=>"_blank", :class=>"master-link"
+          -else
+            = entity.name
+        .row
+          .col-md-6
+            %dl.dl-horizontal.dl-horizontal-left
+              %dt Username
+              %dd=entity.username
+            %dl.dl-horizontal.dl-horizontal-left
+              %dt Password
+              %dd 
+                %span.label.label-default{:id=>"hidden_passsword_#{entity.id.to_s}"}
+                  HIDDEN
+                %span.label.label-primary{:id=>"show_passsword_#{entity.id.to_s}", :style=>"display: none;"}
+          .col-md-6
+            -if entity.description
+              %dl
+                %dt Description
+                %dd=entity.description
+            -entity.custom_attributes.each do |key|
+              %dl.dl-horizontal.dl-horizontal-left
+                %dt=key
+                %dd= entity[key]
+      .list-group-separator
+  

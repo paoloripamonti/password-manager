@@ -1,0 +1,21 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %title Password Manager
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    = csrf_meta_tags
+
+    // Use Google Font: Roboto
+    = google_webfonts_init({google: ['Roboto Slab', 'Roboto'] })
+  %body
+    = render 'layouts/header'
+    = render 'layouts/flash_messages'
+    .container
+      = yield
+      
+    = render 'layouts/modal_master_password'
+
+
+
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true

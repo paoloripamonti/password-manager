@@ -1,0 +1,24 @@
+#modal_add_attribute.modal.fade
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{:type => "button", "data-dismiss" => "modal"} ×
+        %h2 Add Attribute
+      .modal-body
+        %br
+        .form-horizontal
+
+          .form-group
+            = label_tag :key_attribute, 'Key', :class=>"col-md-3 control-label"
+            .col-md-8
+              = text_field_tag :key_attribute, nil, :class=>"form-control", :required=>true
+
+          .form-group
+            = label_tag :value_attribute, 'Value', :class=>"col-md-3 control-label"
+            .col-md-8
+              = text_field_tag :value_attribute, nil, :class=>"form-control", :required=>true
+
+
+      .modal-footer
+        =link_to 'Add', '#', :'data-dismiss'=>"modal", :class=>"btn btn-raised btn-primary add_attribute"
+          

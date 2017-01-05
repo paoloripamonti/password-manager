@@ -1,0 +1,20 @@
+.container
+  .row
+    .col-sm-6.col-md-4.col-md-offset-4
+      %h1.text-center.login-title Log in
+      .account-wall
+        %img.profile-img{:alt => "", :src => "https://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/eu7opA4byxI/photo.jpg?sz=120"}/
+        .form-signin
+          = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+            = f.email_field :email, autofocus: true, :class=>"form-control", :required=>true, :placeholder => "Email", :autocomplete=>false
+            %br
+            = f.password_field :password, autocomplete: "off", :class=>"form-control", :required=>true, :placeholder => "Password", :autocomplete=>false
+            = f.submit 'Sign in', :class=>"btn btn-lg btn-primary btn-block"
+            - if devise_mapping.rememberable?
+              .checkbox
+                %label
+                  = f.check_box :remember_me
+                  %span.checkbox-material
+                  Remeber Me
+            %span.clearfix
+          = render "devise/shared/links"  

@@ -1,0 +1,64 @@
+= form_for @entity, :html => {:class => "form-horizontal"} do |f|
+  - if @entity.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@entity.errors.count, "error")} prohibited this entity from being saved:"
+      %ul
+        - @entity.errors.full_messages.each do |msg|
+          %li= msg
+
+  .form-group
+    = f.label :name, 'Name*', :class=>"col-md-2 control-label"
+    .col-md-8
+      = f.text_field :name, :class=>"form-control", :required=>true
+  .form-group
+    = f.label :description, 'Description', :class=>"col-md-2 control-label"
+    .col-md-8
+      = f.text_area :description, :class=>"form-control"
+  .form-group
+    = f.label :username, 'Username*', :class=>"col-md-2 control-label"
+    .col-md-8
+      = f.text_field :username, :class=>"form-control", :required=>true  
+  .form-group
+    = f.label :url, 'URL', :class=>"col-md-2 control-label"
+    .col-md-8
+      = f.text_field :url, :class=>"form-control"
+  .form-group
+    = f.label :password, 'Password*', :class=>"col-md-2 control-label"
+    .col-md-8
+      = f.password_field :password, :class=>"form-control", :required=>true
+  .form-group
+    = f.label :master_password, 'Master Password*', :class=>"col-md-2 control-label"
+    .col-md-8
+      = f.password_field :master_password, :class=>"form-control", :required=>true
+
+  .form-group
+    .col-md-8.col-md-offset-2
+      %table#table_attribute.table.table-condensed.table-hover      
+        %thead
+          %tr
+            %th Key
+            %th Value
+            %th
+        %tbody
+          - @entity.custom_attributes.each do |key|
+            %tr
+              %td
+                %strong=key
+              %td
+                =@entity[key]
+                =hidden_field_tag "entity[#{key}]", @entity[key]
+              %td
+                .pull-right
+                  = button_tag :onclick=>"$(this).closest('tr').remove()", :class=>"btn btn-raised btn-xs btn-danger" do
+                    %i.mi.md-18.bottom delete
+  .form-group
+    .col-md-offset-2
+      =link_to "#", :class=>"btn btn-info btn-xs add_attribute_modal" do
+        %i.mi.md-18.bottom add_circle_outline
+        Add Attribute
+
+  .form-group
+    .col-md-offset-2
+      = f.submit 'Save', :class=>"btn btn-raised btn-primary"
+      = link_to 'Back', entities_path, :class=>"btn btn-raised btn-default"
+
