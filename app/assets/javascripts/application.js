@@ -44,7 +44,35 @@ $(".entry-master-password").click(function(){
   return false;
 })
 
+$('#check-master-password-form').on('keyup keypress', function(e) {
+  var keyCode = e.keyCode || e.which;
+  if (keyCode === 13) { 
+    getPassword();
+    return false;
+  }
+});
+
+
+
 $(".check-master-password-btn").click(function(){
+  getPassword();
+  return false;
+})
+
+
+function navbarSearch(){
+  text = $("#nav-search").val().toUpperCase();
+  $(".list-group-item").each(function(index, obj){
+      item = $($(obj).find(".master-link")[0]).html().toUpperCase();
+      if(item.indexOf(text) > -1){
+        $(obj).show();
+      }else{
+        $(obj).hide();
+      }
+  })
+}
+
+function getPassword(){
   $("#error_decrypt_div").hide() 
   $.ajax({
     url: $("#check-master-password-form").attr('data-ref-action'),
@@ -63,20 +91,6 @@ $(".check-master-password-btn").click(function(){
     },
     dataType: 'json'
   });
-  return false;
-})
-
-
-function navbarSearch(){
-  text = $("#nav-search").val().toUpperCase();
-  $(".list-group-item").each(function(index, obj){
-      item = $($(obj).find(".master-link")[0]).html().toUpperCase();
-      if(item.indexOf(text) > -1){
-        $(obj).show();
-      }else{
-        $(obj).hide();
-      }
-  })
 }
 
 $(".add_attribute_modal").click(function(){
