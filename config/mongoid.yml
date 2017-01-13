@@ -142,3 +142,19 @@ test:
         read:
           mode: :primary
         max_pool_size: 1
+
+
+production:
+  clients:
+    default:
+      database: password_manager_production
+      hosts:
+        - localhost:27017
+      options:
+        read:
+          mode: :primary
+        max_pool_size: 5
+        user: <%= ENV['MONGO_USER'] %>
+        password: <%= ENV['MONGO_PASSWORD'] %>
+        roles:
+           - 'dbOwner'
